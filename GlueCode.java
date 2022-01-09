@@ -292,7 +292,17 @@ public class GlueCode {
 
 //If any query is found in any input buffer, read it, analyse it, and then do the appropriate operation.
 
-//The required appropriate operation may be to give information (publish) to any module or to get some information (query) from any module.
+    if (process found)
+    {
+        send the process file to the respective module
+    }
+    else if (query found)
+    {
+        read the XML file check that the query belongs to which of the following categories... If the query belongs to any of the following categories, then process the query...
+    }
+
+//The required appropriate operation may be to give some information (publish) to any module or to get some information (query) from any module.
+// All the modules will only send one query at a single time. The query/publish will be sent in the form of messages or XML files, one query/publish at a time. There wil be a seperate Java file (a seperate class) which will be a part of the Glue Code. The file/class will contain the information about which methods belongs to which module. When the Glue COde receives a query, the Glue code matches the query with the queries mentioned in the file and tries to find out thst which query belongs to which module, and then the Glue code sends the received query to the respective module.
 
 //In such a case, the Glue Code will call the respective module directly via an API call.
 
