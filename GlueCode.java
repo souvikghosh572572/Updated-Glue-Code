@@ -302,7 +302,8 @@ public class GlueCode {
     }
 
 //The required appropriate operation may be to give some information (publish) to any module or to get some information (query) from any module.
-// All the modules will only send one query at a single time. The query/publish will be sent in the form of messages or XML files, one query/publish at a time. There wil be a seperate Java file (a seperate class) which will be a part of the Glue Code. The file/class will contain the information about which methods belongs to which module. When the Glue COde receives a query, the Glue code matches the query with the queries mentioned in the file and tries to find out thst which query belongs to which module, and then the Glue code sends the received query to the respective module.
+// All the modules can send only one query/publish at a single time. The query/publish will be sent in the form of messages or XML files, one query/publish at a time. There wil be a seperate Java file (a seperate class) which will be a part of the Glue Code. The file/class will contain the information about which methods belongs to which module. When the Glue Code receives a query/publish message/file, the Glue Code matches the query/publish with the queries (methods) mentioned in the file and tries to find out that which query (method) belongs to which module, and then the Glue Code sends the received query/publish message/file to the respective module.
+// The other modules needs to make sure that the query/publish message/file contains the name of the module who sent the query/publish message/file to the Glue Code.
 
 //In such a case, the Glue Code will call the respective module directly via an API call.
 
