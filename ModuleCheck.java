@@ -1,4 +1,4 @@
-﻿package com.ehelpy.brihaspati4.GC;
+package com.ehelpy.brihaspati4.GC;
 //ModuleCheck Pseudo Code:
 
 //  Authentication Manager = am
@@ -60,7 +60,7 @@ public class ModuleCheck
 {
     private String module_name;
     private String f_qname;
-    public static String findMethodName(String qname)
+    public static String findModuleName(String qname)
     {
         // qname.startsWith("am01")  ---> Here, qname will contain the whole name (for now, we are considering that all the queries will be case sensitive.) and the string mentioned in the qname.startsWith("am01"), for example "am01", will only contain the method names without the parameters, so that the qname and the method name matches exactly.
 
