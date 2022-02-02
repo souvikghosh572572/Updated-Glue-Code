@@ -15,6 +15,7 @@ package com.ehelpy.brihaspati4.GC;
 
 //import the required packages...
 import java.util.LinkedList;
+//import com.ehelpy.brihaspati4.GC.ModuleCheck;  XXXXXXXXXXXX
 //import com.ehelpy.brihaspati4.DFS.DFSUI;
 //import com.ehelpy.brihaspati4.DFS.Save_Retrive_data_Structures;
 /*import com.ehelpy.brihaspati4.comnmgr.CommunicationManager;
@@ -64,6 +65,13 @@ public class GlueCode {
 
 //Initialize a status_skip_flag corresponding to each input buffer (one input buffer for each module) of the Glue Code with 1. (This status_skip_flag will contain values in the powers of 2 such as 1, 2, 4, etc., upto some specific number limit such as 16 or 32.) (The default value for the status_skip_flag for each module at starting will be 1.)
 
+    private String final_query;
+    //Example: private static ConfigData config;
+    //         config = ConfigData.getInstance();
+
+    //final_query = ModuleCheck.findModuleName(qname);
+    //Call the final query...
+
     private int status_skip_flag_am = 1;
     private int status_skip_flag_rm = 1;
     private int status_skip_flag_cm = 1;
@@ -73,6 +81,7 @@ public class GlueCode {
     private int count = 0;
     // input module buffer output module
     LinkedList gc_buffer_am = new LinkedList();
+    // here am sent the data to gc
     LinkedList gc_buffer_rm = new LinkedList();
     LinkedList gc_buffer_cm = new LinkedList();
     LinkedList gc_buffer_im = new LinkedList();
