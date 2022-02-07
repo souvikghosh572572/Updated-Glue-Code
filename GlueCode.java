@@ -140,7 +140,6 @@ public class GlueCode {
         if ((gc_buffer_am.size())>0)
         {
             status_skip_flag_am = 1;
-            current_skip_flag_am = 1;
             count=0;
             while ( (gc_buffer_am.size()>0) && (count<1000) )
             {
@@ -172,7 +171,6 @@ public class GlueCode {
         if ((gc_buffer_rm.size())>0)
         {
             status_skip_flag_rm = 1;
-            current_skip_flag_rm = 1;
             count=0;
             while ( (gc_buffer_rm.size()>0) && (count<1000) )
             {
@@ -204,7 +202,6 @@ public class GlueCode {
         if ((gc_buffer_cm.size())>0)
         {
             status_skip_flag_cm = 1;
-            current_skip_flag_cm = 1;
             count=0;
             while ( (gc_buffer_cm.size()>0) && (count<1000) )
             {
@@ -236,7 +233,6 @@ public class GlueCode {
         if ((gc_buffer_im.size())>0)
         {
             status_skip_flag_im = 1;
-            current_skip_flag_im = 1;
             count=0;
             while ( (gc_buffer_im.size()>0) && (count<1000) )
             {
@@ -268,7 +264,6 @@ public class GlueCode {
         if ((gc_buffer_ws.size())>0)
         {
             status_skip_flag_ws = 1;
-            current_skip_flag_ws = 1;
             count=0;
             while ( (gc_buffer_ws.size()>0) && (count<1000) )
             {
