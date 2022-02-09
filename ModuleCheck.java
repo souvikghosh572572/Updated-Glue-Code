@@ -89,7 +89,7 @@ public class ModuleCheck
         {
             module_name = "im";
         }
-        else if ((qname.startsWith("rm01")) || (qname.startsWith("rm02")) || (qname.startsWith("rm03")))
+        else if ((qname.startsWith("mergeRoutingTable(File ")) || (qname.startsWith("rm02")) || (qname.startsWith("rm03")))
         {
             module_name = "rm";
         }
