@@ -79,7 +79,7 @@ public class GlueCode {
     private int status_skip_flag_ws = 1;
     private int max_limit_of_skip_flags = 32;
     private int count = 0;
-    // input module buffer output module
+    // inputModule_buffer_outputModule
     private LinkedList gc_buffer_am = new LinkedList();
     // here am sent the data to gc
     private LinkedList gc_buffer_rm = new LinkedList();
