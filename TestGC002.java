@@ -60,17 +60,17 @@ import com.ehelpy.brihaspati4.routingmgmt.RoutingManager;
 //import com.ehelpy.brihaspati4.simulateGC.IM.Testing;
 
 
-public class TestGC {
+public class TestRM {
 //Start thread of Routing Manager.
 //Start thread of Communication Manager.
 
-    private String final_query;
+    //private String final_query;
     //Example: private static ConfigData config;
     //         config = ConfigData.getInstance();
 
     //final_query = ModuleCheck.findModuleName(qname);
     //Call the final query...
-
+/*
     private int status_skip_flag_rm = 1;
     private int status_skip_flag_cm = 1;
 
@@ -79,7 +79,7 @@ public class TestGC {
 
     private int max_limit_of_skip_flags = 32;
     private int count = 0;
-
+*/
     //private String[] module_acronyms = {"am", "cm", "im", "rm", "ws", "web", "voip", "dfs", "ufs", "mail", "sms"};
 
     // inputModule_buffer_outputModule
