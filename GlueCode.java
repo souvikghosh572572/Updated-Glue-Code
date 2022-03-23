@@ -35,6 +35,8 @@ import com.ehelpy.brihaspati4.overlaymgmt.OverlayManagement;
 //import com.ehelpy.brihaspati4.routingmgmt.UpdateIP;
 //import com.ehelpy.brihaspati4.voip.B4services;
 
+import java.io.FileReader;
+import java.util.Properties;
 import java.io.IOException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -94,22 +96,23 @@ public class GlueCode
 
     //Initialize a current_skip_flag corresponding to each input buffer (one input buffer for each module) of the Glue Code with 1. (This current_skip_flag will contain the current value; ie., after how many rotations the input buffer corresponding to that respective module will be checked.) (The default value for the current_skip_flag for each module at starting will be 1.)
 
-    private int current_skip_flag_am = 1;
-    private int current_skip_flag_cm = 1;
-    private int current_skip_flag_im = 1;
-    private int current_skip_flag_rm = 1;
-    private int current_skip_flag_ws = 1;
-    private int current_skip_flag_web = 1;
-    private int current_skip_flag_dfs = 1;
-    private int current_skip_flag_ufs = 1;
-    private int current_skip_flag_sms = 1;
-    private int current_skip_flag_mail = 1;
-    private int current_skip_flag_voip = 1;
-    private int current_skip_flag_adbk = 1;
-    private int current_skip_flag_srch = 1;
+    private static int current_skip_flag_am = 1;
+    private static int current_skip_flag_cm = 1;
+    private static int current_skip_flag_im = 1;
+    private static int current_skip_flag_rm = 1;
+    private static int current_skip_flag_ws = 1;
+    private static int current_skip_flag_web = 1;
+    private static int current_skip_flag_dfs = 1;
+    private static int current_skip_flag_ufs = 1;
+    private static int current_skip_flag_sms = 1;
+    private static int current_skip_flag_mail = 1;
+    private static int current_skip_flag_voip = 1;
+    private static int current_skip_flag_adbk = 1;
+    private static int current_skip_flag_srch = 1;
 
-    private int max_limit_of_skip_flags = 32;
-    private int count = 0;
+    private static int max_limit_of_skip_flags = 32;
+    private static int max_limit_of_buffer = 1024;
+    private static int count = 0;
     //private String[] module_acronyms = {"am", "cm", "im", "rm", "ws", "web", "voip", "dfs", "ufs", "mail", "sms"};
 
     // inputModule_buffer_outputModule
@@ -127,12 +130,12 @@ public class GlueCode
     private static LinkedList gc_buffer_voip = new LinkedList();
     private static LinkedList gc_buffer_adbk = new LinkedList();
     private static LinkedList gc_buffer_srch = new LinkedList();
-    
+
     private static LinkedList internal_process_queue = new LinkedList();
     private static List process_var = new ArrayList();
     private static String destination_module = new String();
 
-    public static GlueCode gc = new GlueCode();
+    //public static GlueCode gc = new GlueCode();
     //public static TestCM cm = new TestCM();
     //public static TestRM rm = new TestRM();
 
@@ -147,73 +150,165 @@ public class GlueCode
 
     // gc.addMessage_gc_buffer_rm(list_variable)
 
+
     public static void addMessage_gc_buffer_am(List amMessage)
     {
-        gc_buffer_am.add(amMessage);
-        System.out.println("List received by GC's (AM) input buffer.");
+        if ((gc_buffer_am.size()) < max_limit_of_buffer)
+        {
+            gc_buffer_am.add(amMessage);
+            System.out.println("List received by GC's (AM) input buffer.");
+        }
+        else
+        {
+            System.out.println("GC's (AM) input buffer is Full.");
+        }
     }
     public static void addMessage_gc_buffer_cm(List cmMessage)
     {
-        gc_buffer_cm.add(cmMessage);
-        System.out.println("List received by GC's (CM) input buffer.");
+        if ((gc_buffer_cm.size()) < max_limit_of_buffer)
+        {
+            gc_buffer_cm.add(cmMessage);
+            System.out.println("List received by GC's (CM) input buffer.");
+        }
+        else
+        {
+            System.out.println("GC's (CM) input buffer is Full.");
+        }
     }
     public static void addMessage_gc_buffer_im(List imMessage)
     {
-        gc_buffer_im.add(imMessage);
-        System.out.println("List received by GC's (IM) input buffer.");
+        if ((gc_buffer_im.size()) < max_limit_of_buffer)
+        {
+            gc_buffer_im.add(imMessage);
+            System.out.println("List received by GC's (IM) input buffer.");
+        }
+        else
+        {
+            System.out.println("GC's (IM) input buffer is Full.");
+        }
     }
     public static void addMessage_gc_buffer_rm(List rmMessage)
     {
-        gc_buffer_rm.add(rmMessage);
-        System.out.println("List received by GC's (RM) input buffer.");
+        if ((gc_buffer_rm.size()) < max_limit_of_buffer)
+        {
+            gc_buffer_rm.add(rmMessage);
+            System.out.println("List received by GC's (RM) input buffer.");
+        }
+        else
+        {
+            System.out.println("GC's (RM) input buffer is Full.");
+        }
     }
     public static void addMessage_gc_buffer_ws(List wsMessage)
     {
-        gc_buffer_ws.add(wsMessage);
-        System.out.println("List received by GC's (WS) input buffer.");
+        if ((gc_buffer_ws.size()) < max_limit_of_buffer)
+        {
+            gc_buffer_ws.add(wsMessage);
+            System.out.println("List received by GC's (WS) input buffer.");
+        }
+        else
+        {
+            System.out.println("GC's (WS) input buffer is Full.");
+        }
     }
     public static void addMessage_gc_buffer_web(List webMessage)
     {
-        gc_buffer_web.add(webMessage);
-        System.out.println("List received by GC's (WEB) input buffer.");
+        if ((gc_buffer_web.size()) < max_limit_of_buffer)
+        {
+            gc_buffer_web.add(webMessage);
+            System.out.println("List received by GC's (WEB) input buffer.");
+        }
+        else
+        {
+            System.out.println("GC's (WEB) input buffer is Full.");
+        }
     }
     public static void addMessage_gc_buffer_dfs(List dfsMessage)
     {
-        gc_buffer_dfs.add(dfsMessage);
-        System.out.println("List received by GC's (DFS) input buffer.");
+        if ((gc_buffer_dfs.size()) < max_limit_of_buffer)
+        {
+            gc_buffer_dfs.add(dfsMessage);
+            System.out.println("List received by GC's (DFS) input buffer.");
+        }
+        else
+        {
+            System.out.println("GC's (DFS) input buffer is Full.");
+        }
     }
     public static void addMessage_gc_buffer_ufs(List ufsMessage)
     {
-        gc_buffer_ufs.add(ufsMessage);
-        System.out.println("List received by GC's (UFS) input buffer.");
+        if ((gc_buffer_ufs.size()) < max_limit_of_buffer)
+        {
+            gc_buffer_ufs.add(ufsMessage);
+            System.out.println("List received by GC's (UFS) input buffer.");
+        }
+        else
+        {
+            System.out.println("GC's (UFS) input buffer is Full.");
+        }
     }
     public static void addMessage_gc_buffer_sms(List smsMessage)
     {
-        gc_buffer_sms.add(smsMessage);
-        System.out.println("List received by GC's (SMS) input buffer.");
+        if ((gc_buffer_sms.size()) < max_limit_of_buffer)
+        {
+            gc_buffer_sms.add(smsMessage);
+            System.out.println("List received by GC's (SMS) input buffer.");
+        }
+        else
+        {
+            System.out.println("GC's (SMS) input buffer is Full.");
+        }
     }
     public static void addMessage_gc_buffer_mail(List mailMessage)
     {
-        gc_buffer_mail.add(mailMessage);
-        System.out.println("List received by GC's (MAIL) input buffer.");
+        if ((gc_buffer_mail.size()) < max_limit_of_buffer)
+        {
+            gc_buffer_mail.add(mailMessage);
+            System.out.println("List received by GC's (MAIL) input buffer.");
+        }
+        else
+        {
+            System.out.println("GC's (MAIL) input buffer is Full.");
+        }
     }
     public static void addMessage_gc_buffer_voip(List voipMessage)
     {
-        gc_buffer_voip.add(voipMessage);
-        System.out.println("List received by GC's (VOIP) input buffer.");
+        if ((gc_buffer_voip.size()) < max_limit_of_buffer)
+        {
+            gc_buffer_voip.add(voipMessage);
+            System.out.println("List received by GC's (VOIP) input buffer.");
+        }
+        else
+        {
+            System.out.println("GC's (VOIP) input buffer is Full.");
+        }
     }
     public static void addMessage_gc_buffer_adbk(List adbkMessage)
     {
-        gc_buffer_adbk.add(adbkMessage);
-        System.out.println("List received by GC's (ADBK) input buffer.");
+        if ((gc_buffer_adbk.size()) < max_limit_of_buffer)
+        {
+            gc_buffer_adbk.add(adbkMessage);
+            System.out.println("List received by GC's (ADBK) input buffer.");
+        }
+        else
+        {
+            System.out.println("GC's (ADBK) input buffer is Full.");
+        }
     }
     public static void addMessage_gc_buffer_srch(List srchMessage)
     {
-        gc_buffer_srch.add(srchMessage);
-        System.out.println("List received by GC's (SRCH) input buffer.");
+        if ((gc_buffer_srch.size()) < max_limit_of_buffer)
+        {
+            gc_buffer_srch.add(srchMessage);
+            System.out.println("List received by GC's (SRCH) input buffer.");
+        }
+        else
+        {
+            System.out.println("GC's (SRCH) input buffer is Full.");
+        }
     }
-    
-    
+
+
     public static void display_buffer_status()
     {
         System.out.println("\nSHOWING BUFFER STATUS:");
@@ -243,6 +338,7 @@ public class GlueCode
     System.out.println(gc_buffer_rm);
      */
 
+    /*
     // Starting Authentication Manager thread. The Authenticator object will be in
     // ../authenticate directory
     Authenticator auth = Authenticator.getInstance();
@@ -271,6 +367,7 @@ public class GlueCode
     WebUIServer WebUIS = WebUIServer.getInstance();
     WebUIS.start();
     globj.updateObjRef("WebUI", WebUIS);
+    */
 
     //The input buffers of the Glue Code will be checked periodically (only if the current_skip_flag’s value is 1. More about this in the next point.) for all the modules in Round Robin fashion. Each input buffer will be checked for 5 seconds or until all the data/query are extracted, whichever time is less.
 
@@ -440,7 +537,7 @@ public class GlueCode
                     {
                         current_skip_flag_ws--;
                     }
-                    
+
 
                     if(current_skip_flag_web == 1)
                     {
@@ -564,7 +661,7 @@ public class GlueCode
                     {
                         current_skip_flag_sms--;
                     }
-                    
+
 
                     if(current_skip_flag_mail == 1)
                     {
@@ -757,11 +854,69 @@ public class GlueCode
                             //gc.temp001(process_var);
                             //}
 
-                            if (destination_module == "rm") {
+                            if (destination_module == "am")
+                            {
+                                am.addMessage_am_buffer_gc(process_var);
+                                //display_buffer_status();
+                            }
+                            else if (destination_module == "cm")
+                            {
+                                cm.addMessage_cm_buffer_gc(process_var);
+                                //display_buffer_status();
+                            }
+                            else if (destination_module == "im")
+                            {
+                                im.addMessage_im_buffer_gc(process_var);
+                                //display_buffer_status();
+                            }
+                            else if (destination_module == "rm")
+                            {
                                 rm.addMessage_rm_buffer_gc(process_var);
                                 //display_buffer_status();
-                            } else if (destination_module == "cm") {
-                                cm.addMessage_cm_buffer_gc(process_var);
+                            }
+                            else if (destination_module == "ws")
+                            {
+                                ws.addMessage_ws_buffer_gc(process_var);
+                                //display_buffer_status();
+                            }
+                            else if (destination_module == "web")
+                            {
+                                web.addMessage_web_buffer_gc(process_var);
+                                //display_buffer_status();
+                            }
+                            else if (destination_module == "dfs")
+                            {
+                                dfs.addMessage_dfs_buffer_gc(process_var);
+                                //display_buffer_status();
+                            }
+                            else if (destination_module == "ufs")
+                            {
+                                ufs.addMessage_ufs_buffer_gc(process_var);
+                                //display_buffer_status();
+                            }
+                            else if (destination_module == "sms")
+                            {
+                                sms.addMessage_sms_buffer_gc(process_var);
+                                //display_buffer_status();
+                            }
+                            else if (destination_module == "mail")
+                            {
+                                mail.addMessage_mail_buffer_gc(process_var);
+                                //display_buffer_status();
+                            }
+                            else if (destination_module == "voip")
+                            {
+                                voip.addMessage_voip_buffer_gc(process_var);
+                                //display_buffer_status();
+                            }
+                            else if (destination_module == "adbk")
+                            {
+                                adbk.addMessage_adbk_buffer_gc(process_var);
+                                //display_buffer_status();
+                            }
+                            else if (destination_module == "srch")
+                            {
+                                srch.addMessage_srch_buffer_gc(process_var);
                                 //display_buffer_status();
                             }
                         }
@@ -778,19 +933,71 @@ public class GlueCode
         processingThread.start();
     }
 
+    public static void mainMethod()
+    {
+        //am.get_gc_instance(gc);
+        //cm.get_gc_instance(gc);
+        //im.get_gc_instance(gc);
+        //rm.get_gc_instance(gc);
+        //ws.get_gc_instance(gc);
+        //web.get_gc_instance(gc);
+        //dfs.get_gc_instance(gc);
+        //ufs.get_gc_instance(gc);
+        //sms.get_gc_instance(gc);
+        //mail.get_gc_instance(gc);
+        //voip.get_gc_instance(gc);
+        //adbk.get_gc_instance(gc);
+        //srch.get_gc_instance(gc);
+
+        readingthread();
+        processingthread();
+    }
+
+    /*
     public static void main (String[] str)
     {
-        cm.get_gc_instance(gc);
-        rm.get_gc_instance(gc);
+        public static GlueCode gc = new GlueCode();
 
+        try(FileReader reader =  new FileReader("gc_config"))
+        {
+            Properties properties = new Properties();
+            properties.load(reader);
+            max_limit_of_skip_flags = properties.getProperty("max_limit_of_skip_flags");
+            max_limit_of_buffer = properties.getProperty("max_limit_of_buffer");
+
+            System.out.println(max_limit_of_skip_flags);
+            System.out.println(max_limit_of_buffer);
+        }catch (Exception e)
+        {
+            ;
+            e.printStackTrace();
+        }
+
+        am.get_gc_instance(gc);
+        cm.get_gc_instance(gc);
+        im.get_gc_instance(gc);
+        rm.get_gc_instance(gc);
+        ws.get_gc_instance(gc);
+        web.get_gc_instance(gc);
+        dfs.get_gc_instance(gc);
+        ufs.get_gc_instance(gc);
+        sms.get_gc_instance(gc);
+        mail.get_gc_instance(gc);
+        voip.get_gc_instance(gc);
+        adbk.get_gc_instance(gc);
+        srch.get_gc_instance(gc);
+        */
+
+        /*
         System.out.println("1. Program starts.");
         display_buffer_status();
         cm.sendQuery_gc_buffer_cm();
         System.out.println("5. Program returned to main.");
         display_buffer_status();
+        */
 
-        readingthread();
-        processingthread();
+        //readingthread();
+        //processingthread();
 
         //while (1)
         //{
@@ -896,5 +1103,5 @@ public class GlueCode
             //Address Book Service
             //Start thread of Address Book.
         //} // Process Loop while close
-    } // Main method close
+    //} // Main method close
 } // GlueCode Class close
