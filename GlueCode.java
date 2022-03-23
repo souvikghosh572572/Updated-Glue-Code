@@ -134,6 +134,7 @@ public class GlueCode
     private static LinkedList internal_process_queue = new LinkedList();
     private static List process_var = new ArrayList();
     private static String destination_module = new String();
+    private static GlueCode gc;
 
     //public static GlueCode gc = new GlueCode();
     //public static TestCM cm = new TestCM();
@@ -150,6 +151,13 @@ public class GlueCode
 
     // gc.addMessage_gc_buffer_rm(list_variable)
 
+    public static synchronized GlueCode getInstance() throws Exception {
+        if (gc == null)
+        {
+            gc = new GlueCode();
+        }
+        return gc;
+    }
 
     public static void addMessage_gc_buffer_am(List amMessage)
     {
@@ -307,7 +315,6 @@ public class GlueCode
             System.out.println("GC's (SRCH) input buffer is Full.");
         }
     }
-
 
     public static void display_buffer_status()
     {
@@ -935,19 +942,21 @@ public class GlueCode
 
     public static void mainMethod()
     {
-        //am.get_gc_instance(gc);
-        //cm.get_gc_instance(gc);
-        //im.get_gc_instance(gc);
-        //rm.get_gc_instance(gc);
-        //ws.get_gc_instance(gc);
-        //web.get_gc_instance(gc);
-        //dfs.get_gc_instance(gc);
-        //ufs.get_gc_instance(gc);
-        //sms.get_gc_instance(gc);
-        //mail.get_gc_instance(gc);
-        //voip.get_gc_instance(gc);
-        //adbk.get_gc_instance(gc);
-        //srch.get_gc_instance(gc);
+
+        try(FileReader reader =  new FileReader("configuration/gc_config.txt"))
+        {
+            Properties properties = new Properties();
+            properties.load(reader);
+            max_limit_of_skip_flags = properties.getProperty("max_limit_of_skip_flags");
+            max_limit_of_buffer = properties.getProperty("max_limit_of_buffer");
+
+            System.out.println(max_limit_of_skip_flags);
+            System.out.println(max_limit_of_buffer);
+        }catch (Exception e)
+        {
+            ;
+            e.printStackTrace();
+        }
 
         readingthread();
         processingthread();
