@@ -66,22 +66,9 @@ public class ClientMainNew extends Thread
     
     public static void main(String args[]) throws Exception
     {
-        public static GlueCode gc = new GlueCode();
+        GlueCode gc = GlueCode.getInstance();
+        gc.mainMethod();
 
-        try(FileReader reader =  new FileReader("configuration/gc_config.txt"))
-        {
-            Properties properties = new Properties();
-            properties.load(reader);
-            max_limit_of_skip_flags = properties.getProperty("max_limit_of_skip_flags");
-            max_limit_of_buffer = properties.getProperty("max_limit_of_buffer");
-
-            System.out.println(max_limit_of_skip_flags);
-            System.out.println(max_limit_of_buffer);
-        }catch (Exception e)
-        {
-            ;
-            e.printStackTrace();
-        }
         // @SuppressWarnings("unused")
 
         // Create a singleton global object and set run status as true.
@@ -188,8 +175,6 @@ public class ClientMainNew extends Thread
                * system with advise to user to correct the system date and time. otherwise
                * start the services.
                */
-
-    gc.mainMethod();
 
 	flagset = auth.getAuthVerifyFlag();
         if(flagset) {
